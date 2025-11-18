@@ -1,137 +1,203 @@
-/* ------------------------------
-   Fuente Abbolition
---------------------------------*/
-@font-face {
-  font-family: 'Abbolition';
-  src: url('fonts/Abbolition-Regular.woff2') format('woff2'),
-       url('fonts/Abbolition-Regular.woff') format('woff'),
-       url('fonts/Abbolition-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Abbolition', sans-serif;
-  color: #fff;
-  overflow: hidden;
+html, body {
+    /* CLAVE: Permitimos scroll, pero el contenido estará muy compacto */
+    min-height: 100%; 
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000;
+    color: #fff;
 }
 
-/* ------------------------------
-   Video de fondo
---------------------------------*/
-.background-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  object-fit: cover;
-  z-index: -2;
-}
-
-/* ------------------------------
-   Overlay oscuro
---------------------------------*/
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.55);
-  z-index: -1;
-}
-
-/* ------------------------------
-   Header (logo + botones)
---------------------------------*/
-header {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+/* --- Encabezado --- */
+.main-header {
+    position: fixed;
+    /* CORREGIDO: top debe ser 0 o una unidad válida, no -10 */
+    top: 0; 
+    width: 100%;
+    z-index: 10;
+    padding: 20px 40px; 
 }
 
 .header-content {
-  display: flex;
-  align-items: center;
-  gap: 20px; /* espacio entre logo y botones */
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    max-width: 1500px;
+    margin: auto;
 }
 
 .logo {
-  height: 80px;
+    height: 75px;
+    width: auto;
+    margin-right: 100px;
+    margin-top: 25px;
 }
 
-.nav-links {
-  display: flex;
-  gap: 15px;
+/* --- Enlaces sociales --- */
+.social-links {
+    display: flex;
+    gap: 15px;
 }
 
-.nav-links a {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid #fff;
-  padding: 10px 20px;
-  border-radius: 30px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s ease;
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 0%;
+    margin-right: 20px;
+    background-color: rgba(4, 0, 0, 0.05);
+    border: 0px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
 }
 
-.nav-links a:hover {
-  background: #fff;
-  color: #000;
+.social-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
 }
 
-/* ------------------------------
-   Footer flotante sobre el video
---------------------------------*/
-.floating-footer {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  text-align: center;
-  font-size: 1.2em;
-  color: rgba(255,255,255,0.8);
+.social-links img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
 }
 
-/* ------------------------------
-   Animaciones
---------------------------------*/
-header, .floating-footer {
-  animation: fadeIn 1.5s ease forwards;
+/* --- CONTENEDOR PRINCIPAL Y BLOQUES --- */
+.main-content-blocks {
+    /* CLAVE 1: Reducimos drásticamente el padding superior para subir el contenido */
+    padding-top: 130px; 
+    padding-bottom: 20px;
+    width: 100%;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.content-block {
+    max-width: 750px; 
+    margin: 0 auto; 
+    /* CLAVE 2: Reducimos el espacio entre los bloques grandes (Bloque 1 vs Bloque 2) */
+    margin-bottom: 30px; 
 }
 
-/* ------------------------------
-   Responsividad para móviles
---------------------------------*/
-@media (max-width: 480px) {
-  .logo {
-    height: 60px;
-  }
+/* --- Imagen Pequeña 750px (ESCRITORIO - ANCHO COMPLETO) --- */
+.small-image-box {
+    width: 750px; 
+    /* CLAVE 3: Reducimos el margen entre la imagen pequeña y el reel/video */
+    margin: 0 auto 10px auto; 
+}
 
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-  }
+.small-image-box img {
+    width: 750px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
 
-  header {
-    top: 15px;
-  }
+/* --- VIDEO Y IMAGEN GRANDE (750px) --- */
+.reel-section {
+    position: relative;
+    width: 100%; 
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
-  .floating-footer {
-    font-size: 1em;
-    bottom: 20px;
-  }
+.background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 16 / 9; 
+}
+
+/* --- Cuadro de imagen (AUTOAJUSTE DE PROPORCIÓN) --- */
+.image-box {
+    position: relative;
+    width: 100%; 
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    /* CLAVE 4: Reducimos el margen entre el video/reel y la imagen inferior */
+    margin-top: 30px; 
+    border: 0px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 0; 
+}
+
+.image-box img {
+    display: block;
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+}
+
+/* ------------------------------------- */
+/* --- Responsividad (Ajuste a Celular) --- */
+/* ------------------------------------- */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 10px 15px; 
+    }
+    
+    .logo {
+        height: 30px; 
+        margin-right: 0; 
+        margin-top: 0; 
+    }
+
+    .social-links a {
+        width: 32px; 
+        height: 32px;
+        margin-right: 0; 
+    }
+    
+    .social-links img {
+        width: 16px; 
+        height: 16px;
+    }
+
+    .main-content-blocks {
+        padding-top: 60px; 
+    }
+
+    .content-block {
+        width: 90%; 
+        /* Aumentado el margen entre bloques grandes (Bloque 1 vs Bloque 2) */
+        margin-bottom: 10px; 
+    }
+
+    /* AJUSTE IMAGEN PEQUEÑA EN MÓVIL */
+    .small-image-box {
+        width: 100%; 
+        /* Aumentado el margen inferior (distancia entre imagen y Reel) */
+        margin-bottom: 15px;
+        margin-top: 0; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .small-image-box img {
+        width: 100%; 
+        height: auto;
+    }
+    
+    .background-video {
+        aspect-ratio: 16 / 9;
+    }
+    
+    .reel-section, .image-box {
+        border: none; 
+        /* Aumentado el margen entre Reel e imagen inferior */
+        margin-top: 15px; 
+    }
+    
+    .image-box {
+        margin-top: 15px; 
+    }
 }
